@@ -196,7 +196,7 @@ print("=" * 60)
 
 print("Loading datasets...")
 train_data = pd.read_csv('kdd_train_clean.csv')
-test_data = pd.read_csv('kdd_test_clean.csv')
+test_data = pd.read_csv('kdd_test_clean_v2.csv')
 
 print(f"Training data shape: {train_data.shape}")
 print(f"Test data shape: {test_data.shape}")
