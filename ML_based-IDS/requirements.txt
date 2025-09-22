@@ -1,3 +1,6 @@
 scikit-learn
 pandas
 seaborn
+imbalanced-learn
+xgboost
+numpy
