@@ -1,7 +1,8 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+from imblearn.over_sampling import SMOTE
 
-def load_data(train_path, test_path, target_col=None):
+def load_data(train_path, test_path, target_col=None, apply_smote=False):
     # Load CSVs
     train = pd.read_csv(train_path)
     test = pd.read_csv(test_path)
@@ -22,7 +23,7 @@ def load_data(train_path, test_path, target_col=None):
     X_test = test.drop(columns=[target_col])
     y_test = test[target_col]
 
-    # Encode categorical cols (fit on combined to avoid unseen errors)
+    # Encode categorical cols
     cat_cols = ['protocol_type', 'service', 'flag']
     encoders = {}
     for col in cat_cols:
@@ -34,5 +35,9 @@ def load_data(train_path, test_path, target_col=None):
             X_test[col] = le.transform(X_test[col])
             encoders[col] = le
 
+    # Apply SMOTE oversampling (train only)
+    if apply_smote:
+        smote = SMOTE(random_state=42, sampling_strategy='auto', k_neighbors=1)
+        X_train, y_train = smote.fit_resample(X_train, y_train)
 
     return X_train, X_test, y_train, y_test, encoders
