@@ -3,20 +3,39 @@ from sklearn.tree import DecisionTreeClassifier
 from utils.preprocessing import load_data
 from utils.evaluation import Evaluator
 from imblearn.over_sampling import SMOTE
-from utils.feature_selection import drop_correlated_features, select_features_mi   # 🔹 added
+from utils.feature_selection import drop_correlated_features, select_features_mi
 
-TEST_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/nsl-kdd/clean-test.csv"))
-TRAIN_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/nsl-kdd/clean-train.csv"))
+# Dataset configurations
+DATASETS = {
+    "nsl-kdd": {
+        "train_path": os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/nsl-kdd/clean-train.csv")),
+        "test_path": os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/nsl-kdd/clean-test.csv")),
+        "type": "nsl-kdd"
+    },
+    "cicids2017": {
+        "train_path": os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/cicids2017/Cicid2017_clean.csv")),
+        "test_path": None,  # We'll split this file
+        "type": "cicids2017"
+    }
+}
+
 RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../results/"))
 
 def train_decision_tree(
-    train_path=TRAIN_DIR,    
-    test_path=TEST_DIR,
+    dataset="nsl-kdd",  # 🔹 CHANGED: Use dataset name instead of paths
     results_path=RESULTS_DIR
 ):
-    # 1. Load data
-    X_train, X_test, y_train, y_test, encoders = load_data(train_path, test_path)
+    # 🔹 NEW: Get dataset configuration
+    if dataset not in DATASETS:
+        raise ValueError(f"Dataset '{dataset}' not supported. Choose from: {list(DATASETS.keys())}")
+    
+    config = DATASETS[dataset]
+    train_path = config["train_path"]
+    test_path = config["test_path"]
+    dataset_type = config["type"]
 
+    # 1. Load data
+    X_train, X_test, y_train, y_test, encoders = load_data(train_path, test_path, dataset_type=dataset_type)   
     # 🔹 2. Feature selection
     # Step 1: drop correlated
     X_train, dropped_corr = drop_correlated_features(X_train, threshold=0.9)
@@ -52,4 +71,6 @@ def train_decision_tree(
     return dt, acc, report, cm
 
 if __name__ == "__main__":
-    train_decision_tree()
+    # 🔹 CHANGED: Can now run with different datasets
+    # train_decision_tree(dataset="nsl-kdd")  # Default behavior
+    train_decision_tree(dataset="cicids2017")  # For CICIDS2017
