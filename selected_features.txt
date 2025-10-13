@@ -1,0 +1,36 @@
+============================================================
+SELECTED FEATURES BY RFE
+============================================================
+
+Total selected: 30 out of 78 features
+
+ 1.  Fwd Packet Length Max                             (importance: 0.083312)
+ 2. Init_Win_bytes_forward                             (importance: 0.078837)
+ 3.  Bwd Packet Length Min                             (importance: 0.067794)
+ 4.  Fwd Packet Length Mean                            (importance: 0.065953)
+ 5.  Subflow Fwd Bytes                                 (importance: 0.064164)
+ 6.  Destination Port                                  (importance: 0.064115)
+ 7.  Avg Fwd Segment Size                              (importance: 0.060111)
+ 8. Total Length of Fwd Packets                        (importance: 0.051217)
+ 9. Subflow Fwd Packets                                (importance: 0.046415)
+10.  act_data_pkt_fwd                                  (importance: 0.043231)
+11.  Fwd IAT Std                                       (importance: 0.034006)
+12. Fwd IAT Total                                      (importance: 0.027797)
+13.  Fwd Header Length                                 (importance: 0.022792)
+14.  Fwd Header Length.1                               (importance: 0.022205)
+15.  Fwd IAT Max                                       (importance: 0.021800)
+16.  Fwd Packet Length Std                             (importance: 0.021311)
+17.  Fwd IAT Mean                                      (importance: 0.020134)
+18. Bwd Packet Length Max                              (importance: 0.018245)
+19.  Average Packet Size                               (importance: 0.016005)
+20.  Init_Win_bytes_backward                           (importance: 0.014498)
+21.  Total Backward Packets                            (importance: 0.010570)
+22.  Avg Bwd Segment Size                              (importance: 0.008650)
+23.  Bwd Packet Length Mean                            (importance: 0.008404)
+24.  Fwd IAT Min                                       (importance: 0.007175)
+25.  Total Fwd Packets                                 (importance: 0.007156)
+26.  Flow IAT Std                                      (importance: 0.006824)
+27.  Packet Length Mean                                (importance: 0.004787)
+28.  Packet Length Variance                            (importance: 0.003188)
+29.  Bwd IAT Mean                                      (importance: 0.002304)
+30.  Packet Length Std                                 (importance: 0.000531)
